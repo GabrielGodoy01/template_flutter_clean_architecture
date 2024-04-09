@@ -6,7 +6,9 @@ A template for Flutter projects to help developers start new Flutter projects wi
 
 The Clean Architecture is a software design philosophy that originated from the ideas of Robert C. Martin (Uncle Bob), aiming to create robust and easily maintainable systems. It advocates for clear separation of concerns and independence from external frameworks, promoting a flexible and adaptable architecture. By adopting the principles of Clean Architecture, developers can build applications that are easier to understand, test, and evolve over time. This approach is particularly useful in projects requiring long-term maintenance and scalability, offering a solid foundation for constructing complex applications in Flutter and other platforms.
 
-![img.png](assets/architecture_diagram.png)
+<div style="text-align:center;">
+    ![img.png](assets/architecture_diagram.png)
+</div>
 
 ### Domain Layer
 
