@@ -1,10 +1,12 @@
 # Flutter Clean Architecture Template
 
-A template for Flutter projects to help developers to start a new Flutter projects with a solid architecture that is easy to maintain and scale to create a high-quality application.
+A template for Flutter projects to help developers start new Flutter projects with a solid architecture that is easy to maintain and scale to create a high-quality application.
 
 ## Clean Architecture
 
 The Clean Architecture is a software design philosophy that originated from the ideas of Robert C. Martin (Uncle Bob), aiming to create robust and easily maintainable systems. It advocates for clear separation of concerns and independence from external frameworks, promoting a flexible and adaptable architecture. By adopting the principles of Clean Architecture, developers can build applications that are easier to understand, test, and evolve over time. This approach is particularly useful in projects requiring long-term maintenance and scalability, offering a solid foundation for constructing complex applications in Flutter and other platforms.
+
+![img.png](assets/architecture_diagram.png)
 
 ### Domain Layer
 
@@ -62,7 +64,7 @@ The Presentation Layer encompasses the User Interface (UI) of the application. I
 │       │   ├── services
 │       │   │   ├── dio
 │       │   │   ├── uno
-│   │   │   │   ├── firebase
+│       │   │   ├── firebase
 │       │   │   └── shared_preferences
 │       │   └── utils
 │       │
@@ -97,7 +99,7 @@ The Presentation Layer encompasses the User Interface (UI) of the application. I
                 └── usecases
 ```
 
-## Roating
+## Routing
 
 The [go_router](https://pub.dev/packages/go_router) is a lightweight and straightforward routing package for Flutter applications, simplifying the process of navigation between screens. It provides an intuitive API for defining routes and managing navigation within the application. With its simplicity and ease of use, the GoRouter is ideal for efficiently handling screen transitions and organizing navigation logic in Flutter projects.
 
@@ -113,17 +115,56 @@ The [flutter_intl](https://marketplace.visualstudio.com/items?itemName=localizel
 
 We have multiple ways to use network requests in Flutter, but the most common and recommended way is to use the [dio](https://pub.dev/packages/dio) package. Dio is a powerful HTTP client for Dart and Flutter, providing a simple and flexible API for making network requests. With its support for various features such as interceptors, request cancellation, and error handling, Dio simplifies the process of working with APIs and managing network requests in Flutter applications. By leveraging Dio, developers can create robust and efficient networking solutions, enabling seamless communication with external services and data sources.
 
-## Testing
+## Tests
 
-Testing is an essential aspect of software development, ensuring the reliability and quality of applications. In Flutter, we can write different types of tests, including unit tests, widget tests, and integration tests, to validate the behavior and functionality of our code. By writing tests, developers can identify bugs early, prevent regressions, and maintain the stability of their applications. The Flutter testing framework provides a comprehensive suite of tools and utilities for writing tests, making it easy to create and run tests for various parts of the application. By adopting a test-driven development (TDD) approach, developers can build robust and maintainable Flutter applications with confidence.
+[Testing](https://docs.flutter.dev/testing/overview) is an essential aspect of software development, ensuring the reliability and quality of applications. In Flutter, we can write different types of tests, including unit tests, widget tests, and integration tests, to validate the behavior and functionality of our code. By writing tests, developers can identify bugs early, prevent regressions, and maintain the stability of their applications. The Flutter testing framework provides a comprehensive suite of tools and utilities for writing tests, making it easy to create and run tests for various parts of the application. By adopting a test-driven development (TDD) approach, developers can build robust and maintainable Flutter applications with confidence.
 
-## Stagging
+## Staging
 
 Staging environments are essential for testing and validating applications before deployment to production. By setting up staging environments, developers can verify the functionality and performance of their applications in a controlled environment, ensuring that they meet the desired quality standards. In Flutter, we can configure staging environments by defining different configurations for development, staging, and production builds. By leveraging environment-specific configurations, developers can manage API endpoints, feature flags, and other settings based on the deployment environment, facilitating efficient testing and validation of applications. Staging environments play a crucial role in the software development lifecycle, enabling developers to identify and address issues early, leading to more reliable and robust applications.
 
-## Theming
+## Themes
 
-This template provides easily customizable flutter themes like colors, text styles and light/dark themes.
+This template provides an easily customizable theming structure, including definitions for colors, text styles, and light/dark themes. The provided themes are designed to be easily tailored to fit the project's needs. For instance, you can customize primary, secondary, and accent colors to match your application's visual identity. Additionally, text styles can be adjusted to ensure visual consistency throughout the application. Support for light and dark themes is built-in, allowing end-users to select their preferred theme preference. With this flexible theming structure, you can create a cohesive and visually appealing user experience for your Flutter application.
+
+## Name Format
+
+### Files and Directories
+
+- Files have the same name as the classes
+- snake_case
+
+### Classes
+
+- CammelCase
+- **Entity** suffix for entities (e.g., UserEntity)
+- **UseCase** suffix for use cases (e.g., GetUserUseCase)
+- **Failure** suffix for failures (e.g., UserFailure)
+- **Interface** starts with **I** prefix (e.g., IUserRepository)
+- **Repository** suffix for repositories (e.g., UserRepository)
+- **Page** suffix for screens (e.g., HomePage)
+- **Controller** suffix for controllers (e.g., HomeController)
+
+### Methods
+
+- lowerCammelCase
+- Verbs
+
+### Variables
+
+- lowerCammelCase
+- Nouns
+
+### Enums
+
+- CammelCase
+- **Enum** suffix for enums (e.g., UserRoleEnum)
+
+### Tests
+
+- **Test** suffix for test files (e.g., user_repository_test.dart)
+- snake_case
+
 
 ## References
 
