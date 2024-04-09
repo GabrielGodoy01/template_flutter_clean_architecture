@@ -1,0 +1,28 @@
+{
+    "entityErrorMessage": "Field {entityErrorMessage} is not valid",
+    "@entityErrorMessage" : {
+        "placeholders": {
+            "placeholders": {
+                "entityErrorMessage": {}
+            }
+        }
+    },
+
+    "requestErrorMessage": "{message}",
+    "@requestErrorMessage" : {
+        "placeholders": {
+            "placeholders": {
+                "requestErrorMessage": {}
+            }
+        }
+    },
+
+    "noItemsFoundErrorMessage": "No items found for {message}",
+    "@noItemsFoundErrorMessage" : {
+        "placeholders": {
+            "placeholders": {
+                "noItemsFoundErrorMessage": {}
+            }
+        }
+    }
+}
