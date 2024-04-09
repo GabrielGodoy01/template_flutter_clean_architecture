@@ -1,9 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:flutter_clean_architecture_template/app/data/repositories/dio_user_repository.dart';
-import 'package:flutter_clean_architecture_template/app/data/repositories/mock_user_repository.dart';
-import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
-import 'package:flutter_clean_architecture_template/app/helpers/enums/environment_enum.dart';
+import 'package:flutter_clean_architecture_template/app/shared/data/repositories/dio_user_repository.dart';
+import 'package:flutter_clean_architecture_template/app/shared/data/repositories/mock_user_repository.dart';
+import 'package:flutter_clean_architecture_template/app/shared/domain/repositories/user_repository.dart';
+import 'package:flutter_clean_architecture_template/app/shared/helpers/enums/environment_enum.dart';
 
 class EnvironmentConfig {
   static const MSS_BASE_URL = String.fromEnvironment('MSS_BASE_URL');

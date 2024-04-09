@@ -1,5 +1,5 @@
-import 'package:flutter_clean_architecture_template/app/helpers/environments/environment_config.dart';
-import 'package:flutter_clean_architecture_template/app/helpers/services/http_service.dart';
+import 'package:flutter_clean_architecture_template/app/shared/helpers/environments/environment_config.dart';
+import 'package:flutter_clean_architecture_template/app/shared/helpers/services/http_service.dart';
 import 'package:flutter_clean_architecture_template/routes.dart';
 import 'package:uno/uno.dart';
 

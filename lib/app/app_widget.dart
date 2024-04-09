@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_clean_architecture_template/app/helpers/functions/global_snackbar.dart';
-import 'package:flutter_clean_architecture_template/app/themes/app_themes.dart';
+import 'package:flutter_clean_architecture_template/app/shared/helpers/functions/global_snackbar.dart';
+import 'package:flutter_clean_architecture_template/app/shared/themes/app_themes.dart';
 import 'package:flutter_clean_architecture_template/generated/l10n.dart';
 import 'package:flutter_clean_architecture_template/routes.dart';
 

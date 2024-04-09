@@ -1,4 +1,4 @@
-import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
+import 'package:flutter_clean_architecture_template/app/shared/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   UserModel({required super.id, required super.name, required super.isActive});

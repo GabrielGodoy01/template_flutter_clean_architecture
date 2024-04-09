@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_clean_architecture_template/app/helpers/services/http_service.dart';
+import 'package:flutter_clean_architecture_template/app/shared/helpers/services/http_service.dart';
 
 class DioHttpService implements IHttpService {
   final Dio _dio;
