@@ -12,7 +12,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       scaffoldMessengerKey: rootScaffoldMessengerKey,
-      title: 'Provider Template',
+      title: 'Clean Architecture Template',
       debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: AppThemes.lightTheme,
