@@ -35,31 +35,55 @@ Within the Domain Layer, mechanisms for handling failures and errors are defined
 
 The Data Layer serves as the implementation hub for repositories defined in the Domain Layer. Its primary role revolves around data management, including retrieval from diverse sources such as network APIs, local databases, or any other relevant data store. Within this layer, repositories are implemented to handle data access and manipulation, ensuring seamless interaction between the application and external data sources. Additionally, the Data Layer encompasses the definition and structure of data models, which represent the data entities manipulated within the application. These models encapsulate the properties and behaviors of data entities, providing a structured format for data management throughout the application.
 
-### Presentation Layer - Modules
+#### Models
 
-The Presentation Layer encompasses the User Interface (UI) of the application. Its primary responsibility lies in presenting data to the user and managing user interactions. This layer communicates with the UseCases in the Domain Layer to obtain data and update the UI accordingly. To achieve modularity and separation of concerns, I've opted to organize the Presentation Layer into multiple modules. Each module handles distinct parts of the application, allowing for better organization and scalability. Within these modules, various state management solutions such as Provider, Bloc, Riverpod, or MobX can be employed to facilitate efficient management of application state.
+Models represent the data entities used within the application. They define the structure and properties of data objects, enabling the application to interact with data in a consistent and structured manner. Models are typically plain Dart classes that map to data entities from external sources such as APIs or databases. It's an translation layer between the data source and the application, ensuring that data is represented in a format that is easy to work with and manipulate.
+
+#### Repositories
+
+Repositories in the Data Layer implement the interfaces defined in the Domain Layer, providing concrete implementations for data access and manipulation. These repositories interact with external data sources such as APIs, databases, or local data to retrieve and store data. By encapsulating data access logic within repositories, the Data Layer shields the Domain Layer from the complexities of data management, promoting separation of concerns and modularity.
+
+### Presentation Layer
+
+The Presentation Layer encompasses the User Interface (UI) of the application. Its primary responsibility lies in presenting data to the user and managing user interactions. This layer communicates with the UseCases in the Domain Layer to obtain data and update the UI accordingly. To achieve modularity and separation of concerns, I've opted to organize the Presentation Layer into multiple modules. Each module handles distinct parts of the application, allowing for better organization and scalability.
+
+#### Pages
+
+Pages represent the screens or views of the application. They are responsible for rendering the UI components and handling user interactions. Pages interact with controllers, providers, blocs, or other state management solutions to obtain data and update the UI based on user actions or external events.
+
+#### Widgets
+
+Widgets are reusable UI components that can be composed to build the UI of the application. Widgets encapsulate specific UI elements or behaviors, promoting code reusability and maintainability. By breaking down the UI into smaller, composable widgets, developers can create complex and dynamic interfaces with ease. Widgets can be used within pages, other widgets, or controllers to construct the UI of the application.
+
+#### Controllers
+
+Controllers are responsible for managing page states for UI purposes. By separating UI logic into controllers, the Presentation Layer can maintain a clear separation of concerns and facilitate efficient state management.
+
+#### Stores
+
+Stores are responsible for managing the application state and data flow for the entire application. They provide a centralized location for storing and updating application data, ensuring that changes are propagated throughout the application. Stores can be implemented using state management solutions such as Provider, Bloc, Riverpod, or MobX, depending on the requirements of the application.
 
 ### Folder Structure
 
 ```bash
 ├── app
-│   ├── modules
-│   │   └── module_name
+│   ├── data
+│   │   ├── models
+│   │   └── repositories
+│   │
+│   ├── domain
+│   │       ├── entities
+│   │       ├── failures
+│   │       ├── repositories
+│   │       └── usecases
+│   │
+│   ├── presentation
 │   │       ├── pages
 │   │       ├── widgets
-│   │       └── controllers / providers / blocs
+│   │       ├── controllers
+│   │       └── stores
 │   │
 │   └── shared
-│       ├── data
-│       │   ├── models
-│       │   └── repositories
-│       │
-│       ├── domain
-│       │   ├── entities
-│       │   ├── failures
-│       │   ├── repositories
-│       │   └── usecases
-│       │   
 │       ├── helpers
 │       │   ├── enums
 │       │   ├── environments
@@ -71,11 +95,6 @@ The Presentation Layer encompasses the User Interface (UI) of the application. I
 │       │   │   └── shared_preferences
 │       │   └── utils
 │       │
-│       ├── presentation
-│       │   ├── pages
-│       │   ├── widgets
-│       │   └── controllers
-│       │
 │       └── themes
 │   
 ├── generated
@@ -85,21 +104,21 @@ The Presentation Layer encompasses the User Interface (UI) of the application. I
 │
 └── tests
     └── app
-        ├── modules
-        │   └── module_name
-        │       ├── pages
-        │       ├── widgets
-        │       └── controllers / providers / blocs
-        └── shared
-            ├── data
-            │   ├── models
-            │   └── repositories
-            │
-            └── domain
-                ├── entities
-                ├── failures
-                ├── repositories
-                └── usecases
+        ├── data
+        │   ├── models
+        │   └── repositories
+        │
+        ├── domain
+        │       ├── entities
+        │       ├── failures
+        │       ├── repositories
+        │       └── usecases
+        │
+        └── presentation
+                ├── pages
+                ├── widgets
+                ├── controllers
+                └── stores
 ```
 
 ## Routing
@@ -122,13 +141,13 @@ We have multiple ways to use network requests in Flutter, but the most common an
 
 [Testing](https://docs.flutter.dev/testing/overview) is an essential aspect of software development, ensuring the reliability and quality of applications. In Flutter, we can write different types of tests, including unit tests, widget tests, and integration tests, to validate the behavior and functionality of our code. By writing tests, developers can identify bugs early, prevent regressions, and maintain the stability of their applications. The Flutter testing framework provides a comprehensive suite of tools and utilities for writing tests, making it easy to create and run tests for various parts of the application. By adopting a test-driven development (TDD) approach, developers can build robust and maintainable Flutter applications with confidence.
 
-## Staging
+## Environment
 
-Staging environments are essential for testing and validating applications before deployment to production. By setting up staging environments, developers can verify the functionality and performance of their applications in a controlled environment, ensuring that they meet the desired quality standards. In Flutter, we can configure staging environments by defining different configurations for development, staging, and production builds. By leveraging environment-specific configurations, developers can manage API endpoints, feature flags, and other settings based on the deployment environment, facilitating efficient testing and validation of applications. Staging environments play a crucial role in the software development lifecycle, enabling developers to identify and address issues early, leading to more reliable and robust applications.
+In folder **app/shared/helpers/environments**, you can find the environment configurations for the application. The environment configurations are used to manage different settings and configurations for the application based on the environment in which it is running. By defining environment-specific configurations, developers can easily switch between different settings for development, staging, and production environments, ensuring that the application behaves consistently across different deployment scenarios. The environment configurations can include API endpoints, feature flags, authentication settings, and other environment-specific parameters that influence the behavior of the application.
 
 ## Themes
 
-This template provides an easily customizable theming structure, including definitions for colors, text styles, and light/dark themes. The provided themes are designed to be easily tailored to fit the project's needs. For instance, you can customize primary, secondary, and accent colors to match your application's visual identity. Additionally, text styles can be adjusted to ensure visual consistency throughout the application. Support for light and dark themes is built-in, allowing end-users to select their preferred theme preference. With this flexible theming structure, you can create a cohesive and visually appealing user experience for your Flutter application.
+In folder **app/shared/themes** is provided an easily customizable theming structure, including definitions for colors, text styles, and light/dark themes. The provided themes are designed to be easily tailored to fit the project's needs. For instance, you can customize primary, secondary, and accent colors to match your application's visual identity. Additionally, text styles can be adjusted to ensure visual consistency throughout the application. Support for light and dark themes is built-in, allowing end-users to select their preferred theme preference. With this flexible theming structure, you can create a cohesive and visually appealing user experience for your Flutter application.
 
 ## Name Format
 
@@ -146,7 +165,8 @@ This template provides an easily customizable theming structure, including defin
 - **Interface** starts with **I** prefix (e.g., IUserRepository)
 - **Repository** suffix for repositories (e.g., UserRepository)
 - **Page** suffix for screens (e.g., HomePage)
-- **Controller** suffix for controllers (e.g., HomeController)
+- **Controller** suffix for controllers, with the prefix being the name of the page it controls (e.g., HomeController)
+- **Store** suffix for stores (e.g., UserStore)
 
 ### Methods
 

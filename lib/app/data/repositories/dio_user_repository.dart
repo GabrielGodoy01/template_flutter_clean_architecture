@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_clean_architecture_template/app/shared/data/models/user_model.dart';
-import 'package:flutter_clean_architecture_template/app/shared/domain/entities/user_entity.dart';
-import 'package:flutter_clean_architecture_template/app/shared/domain/repositories/user_repository.dart';
+import 'package:flutter_clean_architecture_template/app/data/models/user_model.dart';
+import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
+import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
 import 'package:flutter_clean_architecture_template/app/shared/helpers/enums/http_status_code_enum.dart';
-import 'package:flutter_clean_architecture_template/app/shared/domain/failures/failures.dart';
+import 'package:flutter_clean_architecture_template/app/domain/failures/failures.dart';
 import 'package:flutter_clean_architecture_template/app/shared/helpers/functions/get_http_status_function.dart';
 import 'package:flutter_clean_architecture_template/app/shared/helpers/services/http_service.dart';
 import 'package:flutter_clean_architecture_template/app/injector.dart';
