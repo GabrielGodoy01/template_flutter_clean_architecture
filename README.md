@@ -37,7 +37,7 @@ The Data Layer serves as the implementation hub for repositories defined in the 
 
 ### Presentation Layer - Modules
 
-The Presentation Layer encompasses the User Interface (UI) of the application. Its primary responsibility lies in presenting data to the user and managing user interactions. This layer communicates with the UseCases in the Domain Layer to obtain data and update the UI accordingly. To achieve modularity and separation of concerns, it's advisable to organize the Presentation Layer into multiple modules, each handling distinct parts of the application. Various state management solutions such as Provider, Bloc, Riverpod, or MobX can be employed within this layer to facilitate efficient management of application state.
+The Presentation Layer encompasses the User Interface (UI) of the application. Its primary responsibility lies in presenting data to the user and managing user interactions. This layer communicates with the UseCases in the Domain Layer to obtain data and update the UI accordingly. To achieve modularity and separation of concerns, I've opted to organize the Presentation Layer into multiple modules. Each module handles distinct parts of the application, allowing for better organization and scalability. Within these modules, various state management solutions such as Provider, Bloc, Riverpod, or MobX can be employed to facilitate efficient management of application state.
 
 ### Folder Structure
 
