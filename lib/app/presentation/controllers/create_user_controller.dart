@@ -7,7 +7,7 @@ class CreateUserController {
   final Random _random = Random();
   String _name = '';
 
-  get user => UserEntity(
+  UserEntity get user => UserEntity(
       id: _random.nextInt(9000), name: _name, state: StateEnum.approved);
 
   void changeName(String name) {

@@ -17,7 +17,8 @@ class UserModel extends UserEntity {
       id: map['id'],
       name: map['name'],
       state: StateEnum.values.firstWhere(
-        (element) => element.toString() == map['state'],
+        (element) =>
+            element.name.toUpperCase() == map['state'].toString().toUpperCase(),
       ),
     );
   }

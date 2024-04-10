@@ -5,7 +5,7 @@ import 'package:flutter_clean_architecture_template/app/domain/failures/failures
 abstract class UserRepository {
   Future<Either<Failure, List<UserEntity>>> getAll();
 
-  Future<Either<Failure, UserEntity>> insert(UserEntity model);
+  Future<Either<Failure, UserEntity>> insert(String name);
 
   Future<Either<Failure, UserEntity>> update(UserEntity model);
 

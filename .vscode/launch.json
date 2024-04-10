@@ -15,6 +15,7 @@
         {
             "name": "homolog",
             "request": "launch",
+            "flutterMode": "debug",
             "type": "dart",
             "args": [
                 "--dart-define=ENV=HOMOLOG",

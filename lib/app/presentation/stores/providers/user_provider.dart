@@ -49,8 +49,8 @@ class UserProvider with ChangeNotifier {
     );
   }
 
-  Future<void> createUser(UserEntity user) async {
-    final result = await _createUser(user);
+  Future<void> createUser(String name) async {
+    final result = await _createUser(name);
     setState(
       result.fold(
         (error) {
@@ -62,7 +62,8 @@ class UserProvider with ChangeNotifier {
           injector.get<Logger>().d(
                 '${DateTime.now()} - User created successfully!',
               );
-          final users = (state as UserSuccessState).users;
+          final List<UserEntity> users = (state as UserSuccessState).users;
+          users.insert(0, createdUser);
           return UserSuccessState(users: users);
         },
       ),
@@ -83,6 +84,10 @@ class UserProvider with ChangeNotifier {
                 '${DateTime.now()} - User updated successfully!',
               );
           final users = (state as UserSuccessState).users;
+          final index =
+              users.indexWhere((element) => element.id == updatedUser.id);
+          users.removeAt(index);
+          users.insert(index, updatedUser);
           return UserSuccessState(users: users);
         },
       ),
@@ -103,6 +108,7 @@ class UserProvider with ChangeNotifier {
                 '${DateTime.now()} - User deleted successfully!',
               );
           final users = (state as UserSuccessState).users;
+          users.removeWhere((element) => element.id == id);
           return UserSuccessState(users: users);
         },
       ),

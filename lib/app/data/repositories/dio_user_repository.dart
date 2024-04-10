@@ -17,7 +17,10 @@ class DioUserRepository implements UserRepository {
   @override
   Future<Either<Failure, Unit>> delete(int id) async {
     try {
-      Response response = await _httpService.delete('/user/$id');
+      Response response = await _httpService.post(
+        '/delete-user',
+        data: {'id': id.toString()},
+      );
       if (response.statusCode == 200) {
         return right(unit);
       }
@@ -32,9 +35,11 @@ class DioUserRepository implements UserRepository {
   @override
   Future<Either<Failure, List<UserEntity>>> getAll() async {
     try {
-      return await _httpService.get('/user').then((response) {
+      return await _httpService.get('/get-all-users').then((response) {
         if (response.statusCode == 200) {
-          var users = response.data.map((e) => UserModel.fromJson(e)).toList();
+          var users = (response.data['all_users'] as List)
+              .map((user) => UserModel.fromJson(user))
+              .toList();
           return right(users);
         }
         throw Exception();
@@ -47,14 +52,14 @@ class DioUserRepository implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> insert(UserEntity model) async {
+  Future<Either<Failure, UserEntity>> insert(String name) async {
     try {
-      return await _httpService
-          .post(
-        '/user',
-        data: model.toMap(),
-      )
-          .then((response) {
+      return await _httpService.post(
+        '/create-user',
+        data: {
+          'name': name,
+        },
+      ).then((response) {
         if (response.statusCode == 201) {
           return right(UserModel.fromJson(response.data));
         }
@@ -70,12 +75,13 @@ class DioUserRepository implements UserRepository {
   @override
   Future<Either<Failure, UserEntity>> update(UserEntity model) async {
     try {
-      return await _httpService
-          .put(
-        '/user/${model.id}',
-        data: model.toMap(),
-      )
-          .then((response) {
+      return await _httpService.post(
+        '/update-user',
+        data: {
+          'id': model.id.toString(),
+          'new_name': model.name,
+        },
+      ).then((response) {
         if (response.statusCode == 200) {
           return right(UserModel.fromJson(response.data));
         }

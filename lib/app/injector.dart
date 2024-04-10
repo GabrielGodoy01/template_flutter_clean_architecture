@@ -19,11 +19,10 @@ void registerInstances() {
   injector.add<IHttpService>(DioHttpService.new);
   injector.addLazySingleton(UserProvider.new);
   injector.addLazySingleton<Dio>(
-    () => Dio()
+    () => Dio(BaseOptions(baseUrl: EnvironmentConfig.MSS_BASE_URL))
       ..interceptors.addAll(
         [
           AuthInterceptor(),
-          LogInterceptor(),
         ],
       ),
   );

@@ -40,10 +40,12 @@ class MockUserRepository implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> insert(UserEntity model) async {
-    if (users.any((user) => user.id == model.id)) {
-      return left(ErrorRequest(message: '${model.id}'));
-    }
+  Future<Either<Failure, UserEntity>> insert(String name) async {
+    final model = UserEntity(
+      id: users.length + 1,
+      name: name,
+      state: StateEnum.pending,
+    );
     users.add(model);
     return right(model);
   }

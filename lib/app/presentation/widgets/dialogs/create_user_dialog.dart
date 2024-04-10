@@ -32,7 +32,7 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
         ),
         TextButton(
           onPressed: () {
-            injector.get<UserProvider>().createUser(_controller.user);
+            injector.get<UserProvider>().createUser(_controller.user.name);
             Navigator.pop(context);
           },
           child: const Text('Save'),

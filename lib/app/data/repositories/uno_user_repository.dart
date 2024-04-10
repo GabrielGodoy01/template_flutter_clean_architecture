@@ -50,14 +50,14 @@ class UnoUserRepository implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> insert(UserEntity model) async {
+  Future<Either<Failure, UserEntity>> insert(String name) async {
     try {
-      return await _httpService
-          .post(
+      return await _httpService.post(
         '/user',
-        data: model.toMap(),
-      )
-          .then((response) {
+        data: {
+          'name': name,
+        },
+      ).then((response) {
         if (response.status == 201) {
           var data = response.data;
           var user = UserModel.fromJson(data);

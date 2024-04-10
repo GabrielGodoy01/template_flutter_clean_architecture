@@ -4,7 +4,7 @@ import 'package:flutter_clean_architecture_template/app/domain/repositories/user
 import 'package:flutter_clean_architecture_template/app/domain/failures/failures.dart';
 
 abstract class ICreateUserUsecase {
-  Future<Either<Failure, UserEntity>> call(UserEntity user);
+  Future<Either<Failure, UserEntity>> call(String name);
 }
 
 class CreateUserUsecase implements ICreateUserUsecase {
@@ -13,7 +13,7 @@ class CreateUserUsecase implements ICreateUserUsecase {
   CreateUserUsecase({required this.repository});
 
   @override
-  Future<Either<Failure, UserEntity>> call(UserEntity user) async {
-    return await repository.insert(user);
+  Future<Either<Failure, UserEntity>> call(String name) async {
+    return await repository.insert(name);
   }
 }
