@@ -9,7 +9,7 @@ class EditUserController {
   }
 
   UserEntity get user =>
-      UserEntity(id: _user.id, name: _userName, isActive: _user.isActive);
+      UserEntity(id: _user.id, name: _userName, state: _user.state);
 
   void changeUserName(String name) {
     _userName = name;

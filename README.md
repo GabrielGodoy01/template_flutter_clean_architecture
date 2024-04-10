@@ -19,6 +19,10 @@ The Domain Layer serves as the core of the application, housing its fundamental 
 
 Entities represent the core data structures or business objects of the application. They encapsulate the essential properties and behaviors that define the application's domain. Entities are typically plain Dart classes that model real-world concepts relevant to the application.
 
+#### Enums
+
+Enums are used to represent a fixed set of values or states within the application. They provide a concise and type-safe way to define and manage different states, options, or categories. By using enums, developers can ensure that the application's logic is clear, robust, and easy to understand.
+
 #### Use Cases (Interactors)
 
 Use Cases, also known as Interactors, encapsulate specific application behaviors or use cases. They orchestrate the execution of business logic by interacting with entities and repositories. Use Cases are responsible for coordinating the flow of data and enforcing business rules, ensuring the integrity of the application's logic.

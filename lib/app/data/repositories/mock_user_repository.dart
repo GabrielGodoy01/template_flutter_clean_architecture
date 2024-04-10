@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
+import 'package:flutter_clean_architecture_template/app/domain/enum/state_enum.dart';
 import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
 import 'package:flutter_clean_architecture_template/app/domain/failures/failures.dart';
 
 class MockUserRepository implements UserRepository {
   List<UserEntity> users = [
-    const UserEntity(id: 1, name: 'User 1', isActive: true),
-    const UserEntity(id: 2, name: 'User 2', isActive: false),
-    const UserEntity(id: 3, name: 'User 3', isActive: true),
+    const UserEntity(id: 1, name: 'User 1', state: StateEnum.approved),
+    const UserEntity(id: 2, name: 'User 2', state: StateEnum.approved),
+    const UserEntity(id: 3, name: 'User 3', state: StateEnum.approved),
   ];
 
   @override
