@@ -61,7 +61,7 @@ Controllers are responsible for managing page states for UI purposes. By separat
 
 #### Stores
 
-Stores are responsible for managing the application state and data flow for the entire application. They provide a centralized location for storing and updating application data, ensuring that changes are propagated throughout the application. Stores can be implemented using state management solutions such as Provider, Bloc, Riverpod, or MobX, depending on the requirements of the application.
+Stores play a crucial role in managing the application state and data flow comprehensively. They serve as a centralized hub for storing and updating application data, ensuring seamless propagation of changes across the entire application. Stores can be built using various state management solutions like Provider, Bloc, Riverpod, or MobX. Depending on the specific needs of your application and the chosen state management architecture, you have the flexibility to customize and adapt the store accordingly to meet those requirements.
 
 ### Folder Structure
 
@@ -148,6 +148,10 @@ In folder **app/shared/helpers/environments**, you can find the environment conf
 ## Themes
 
 In folder **app/shared/themes** is provided an easily customizable theming structure, including definitions for colors, text styles, and light/dark themes. The provided themes are designed to be easily tailored to fit the project's needs. For instance, you can customize primary, secondary, and accent colors to match your application's visual identity. Additionally, text styles can be adjusted to ensure visual consistency throughout the application. Support for light and dark themes is built-in, allowing end-users to select their preferred theme preference. With this flexible theming structure, you can create a cohesive and visually appealing user experience for your Flutter application.
+
+## Logging
+
+The [logger](https://pub.dev/packages/logger) package is a versatile logging solution for Dart and Flutter applications, offering a simple and efficient way to log messages and debug information. With its support for different log levels, custom log output formats, and log filtering, the logger package provides a powerful tool for monitoring and troubleshooting applications. By integrating the logger package into your Flutter project, you can easily track and analyze application behavior, identify issues, and improve the overall quality of your codebase. But I recommend using [Firebase Crashlytics](https://pub.dev/packages/firebase_crashlytics) for production environments.
 
 ## Name Format
 

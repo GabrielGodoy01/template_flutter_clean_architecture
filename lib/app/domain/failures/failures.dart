@@ -1,12 +1,16 @@
-import 'dart:developer';
-
+import 'package:flutter_clean_architecture_template/app/injector.dart';
 import 'package:flutter_clean_architecture_template/generated/l10n.dart';
+import 'package:logger/logger.dart';
 
 class Failure implements Exception {
   final String message;
 
   Failure({required this.message}) {
-    log('${DateTime.now()} - $message', name: 'Failure');
+    injector.get<Logger>().e(
+          '${DateTime.now()} - $message',
+          error: this,
+          stackTrace: StackTrace.current,
+        );
   }
 }
 

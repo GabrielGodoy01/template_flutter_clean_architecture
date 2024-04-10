@@ -34,6 +34,7 @@ class MockUserRepository implements UserRepository {
 
   @override
   Future<Either<Failure, List<UserEntity>>> getAll() async {
+    // return left(NoItemsFound(message: 'users'));
     return right(users);
   }
 
