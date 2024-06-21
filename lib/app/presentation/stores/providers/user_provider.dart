@@ -36,7 +36,7 @@ class UserProvider with ChangeNotifier {
     setState(
       result.fold(
         (error) {
-          GlobalSnackBar.error(error.message);
+          GlobalSnackBar.error(error.errorMessage);
           return UserErrorState(error: error);
         },
         (users) {
@@ -54,7 +54,7 @@ class UserProvider with ChangeNotifier {
     setState(
       result.fold(
         (error) {
-          GlobalSnackBar.error(error.message);
+          GlobalSnackBar.error(error.errorMessage);
           return UserErrorState(error: error);
         },
         (createdUser) {
@@ -75,7 +75,7 @@ class UserProvider with ChangeNotifier {
     setState(
       result.fold(
         (error) {
-          GlobalSnackBar.error(error.message);
+          GlobalSnackBar.error(error.errorMessage);
           return UserErrorState(error: error);
         },
         (updatedUser) {
@@ -99,7 +99,7 @@ class UserProvider with ChangeNotifier {
     setState(
       result.fold(
         (error) {
-          GlobalSnackBar.error(error.message);
+          GlobalSnackBar.error(error.errorMessage);
           return UserErrorState(error: error);
         },
         (_) {

@@ -1,5 +1,4 @@
 import 'package:auto_injector/auto_injector.dart';
-import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
@@ -9,9 +8,8 @@ import 'package:flutter_clean_architecture_template/app/domain/usecases/fetch_us
 import 'package:flutter_clean_architecture_template/app/domain/usecases/update_user_usecase.dart';
 import 'package:flutter_clean_architecture_template/app/presentation/stores/providers/user_provider.dart';
 import 'package:flutter_clean_architecture_template/app/shared/helpers/environments/environment_config.dart';
-import 'package:flutter_clean_architecture_template/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
-import 'package:flutter_clean_architecture_template/app/shared/helpers/services/dio/dio_http_service.dart';
-import 'package:flutter_clean_architecture_template/app/shared/helpers/services/http_service.dart';
+import 'package:flutter_clean_architecture_template/app/shared/helpers/network/http_clients/dio_http_client.dart';
+import 'package:flutter_clean_architecture_template/app/shared/helpers/network/http_clients/http_client.dart';
 
 abstract class Injector {
   T get<T extends Object>();
@@ -28,16 +26,8 @@ class _AutoInjector implements Injector {
 
   void _register() {
     injector.addLazySingleton(Logger.new);
-    injector.add<IHttpService>(DioHttpService.new);
+    injector.add<IHttpClient>(DioHttpClient.new);
     injector.addLazySingleton(UserProvider.new);
-    injector.addLazySingleton<Dio>(
-      () => Dio(BaseOptions(baseUrl: EnvironmentConfig.MSS_BASE_URL))
-        ..interceptors.addAll(
-          [
-            AuthInterceptor(),
-          ],
-        ),
-    );
     injector.addLazySingleton<UserRepository>(
         () => EnvironmentConfig.getUserRepo());
     injector.addLazySingleton<IFetchUsersUsecase>(
@@ -70,23 +60,13 @@ class _GetItImpl implements Injector {
 
   void _register() {
     GetIt.I.registerLazySingleton(() => Logger());
-    GetIt.I.registerFactory<IHttpService>(() => DioHttpService(
-          dio: GetIt.I.get<Dio>(),
-        ));
+    GetIt.I.registerFactory<IHttpClient>(() => DioHttpClient());
     GetIt.I.registerLazySingleton(() => UserProvider(
           injector.get<ICreateUserUsecase>(),
           injector.get<IDeleteUserUsecase>(),
           injector.get<IFetchUsersUsecase>(),
           injector.get<IUpdateUserUsecase>(),
         ));
-    GetIt.I.registerLazySingleton<Dio>(
-      () => Dio(BaseOptions(baseUrl: EnvironmentConfig.MSS_BASE_URL))
-        ..interceptors.addAll(
-          [
-            AuthInterceptor(),
-          ],
-        ),
-    );
     GetIt.I.registerLazySingleton<UserRepository>(
         () => EnvironmentConfig.getUserRepo());
     GetIt.I.registerLazySingleton<IFetchUsersUsecase>(

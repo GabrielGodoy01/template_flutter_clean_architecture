@@ -23,14 +23,17 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(placeholders, entityErrorMessage) =>
       "Field ${entityErrorMessage} is not valid";
 
-  static String m1(placeholders, message) => "No items found for ${message}";
-
-  static String m2(placeholders, message) => "${message}";
+  static String m1(placeholders, message) => "${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "entityErrorMessage": m0,
-        "noItemsFoundErrorMessage": m1,
-        "requestErrorMessage": m2
+        "noDataFoundError":
+            MessageLookupByLibrary.simpleMessage("No data found"),
+        "noInternetConnectionError":
+            MessageLookupByLibrary.simpleMessage("No internet connection"),
+        "requestErrorMessage": m1,
+        "timeoutErrorMessage": MessageLookupByLibrary.simpleMessage("Timeout"),
+        "unknownError": MessageLookupByLibrary.simpleMessage("Unknown error")
       };
 }

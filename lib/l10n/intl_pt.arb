@@ -17,12 +17,8 @@
         }
     },
 
-    "noItemsFoundErrorMessage": "Itens não encontrados para: {message}",
-    "@noItemsFoundErrorMessage" : {
-        "placeholders": {
-            "placeholders": {
-                "restaurantName": {}
-            }
-        }
-    }
+    "noInternetConnectionError": "Sem conexão com a internet",
+    "noDataFoundError": "Nenhum dado encontrado",
+    "timeoutErrorMessage": "Timeout",
+    "unknownError": "Erro desconhecido"
 }

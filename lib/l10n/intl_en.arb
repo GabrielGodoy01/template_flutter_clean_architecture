@@ -17,12 +17,8 @@
         }
     },
 
-    "noItemsFoundErrorMessage": "No items found for {message}",
-    "@noItemsFoundErrorMessage" : {
-        "placeholders": {
-            "placeholders": {
-                "noItemsFoundErrorMessage": {}
-            }
-        }
-    }
+    "noInternetConnectionError": "No internet connection",
+    "noDataFoundError": "No data found",
+    "timeoutErrorMessage": "Timeout",
+    "unknownError": "Unknown error"
 }

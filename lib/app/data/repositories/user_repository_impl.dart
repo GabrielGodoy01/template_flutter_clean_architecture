@@ -1,97 +1,67 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_clean_architecture_template/app/data/adapters/user_adapter.dart';
+import 'package:flutter_clean_architecture_template/app/data/datasources/user_datasource.dart';
 import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
 import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
-import 'package:flutter_clean_architecture_template/app/shared/helpers/enums/http_status_code_enum.dart';
 import 'package:flutter_clean_architecture_template/app/domain/failures/failures.dart';
-import 'package:flutter_clean_architecture_template/app/shared/helpers/functions/get_http_status_function.dart';
-import 'package:flutter_clean_architecture_template/app/shared/helpers/services/http_service.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  final IHttpService _httpService;
+  final UserDatasource _datasource;
 
-  UserRepositoryImpl(this._httpService);
+  UserRepositoryImpl(this._datasource);
 
   @override
   Future<Either<Failure, Unit>> delete(int id) async {
     try {
-      Response response = await _httpService.post(
-        '/delete-user',
-        data: {'id': id.toString()},
-      );
-      if (response.statusCode == 200) {
-        return right(unit);
-      }
-      throw Exception();
-    } on DioException catch (e) {
-      HttpStatusCodeEnum errorType = getHttpStatusFunction(
-          e.response?.statusCode ?? HttpStatus.badRequest);
-      return left(ErrorRequest(message: errorType.errorMessage));
+      await _datasource.delete(id);
+
+      return const Right(unit);
+    } on Failure catch (e) {
+      return Left(e);
+    } on Exception catch (exception, stackTrace) {
+      return Left(UnknownError(stackTrace: stackTrace));
     }
   }
 
   @override
   Future<Either<Failure, List<UserEntity>>> getAll() async {
     try {
-      return await _httpService.get('/get-all-users').then((response) {
-        if (response.statusCode == 200) {
-          var users = (response.data['all_users'] as List)
-              .map((user) => UserAdapter.fromJson(user))
-              .toList();
-          return right(users);
-        }
-        throw Exception();
-      });
-    } on DioException catch (e) {
-      HttpStatusCodeEnum errorType = getHttpStatusFunction(
-          e.response?.statusCode ?? HttpStatus.badRequest);
-      return left(ErrorRequest(message: errorType.errorMessage));
+      final result = await _datasource.getAll();
+
+      if (result.isEmpty) {
+        return Left(NoDataFound());
+      }
+
+      return Right(result);
+    } on Failure catch (e) {
+      return Left(e);
+    } on Exception catch (exception, stackTrace) {
+      return Left(UnknownError(stackTrace: stackTrace));
     }
   }
 
   @override
   Future<Either<Failure, UserEntity>> insert(String name) async {
     try {
-      return await _httpService.post(
-        '/create-user',
-        data: {
-          'name': name,
-        },
-      ).then((response) {
-        if (response.statusCode == 201) {
-          return right(UserAdapter.fromJson(response.data));
-        }
-        throw Exception();
-      });
-    } on DioException catch (e) {
-      HttpStatusCodeEnum errorType = getHttpStatusFunction(
-          e.response?.statusCode ?? HttpStatus.badRequest);
-      return left(ErrorRequest(message: errorType.errorMessage));
+      final result = await _datasource.insert(name);
+
+      return Right(result);
+    } on Failure catch (e) {
+      return Left(e);
+    } on Exception catch (exception, stackTrace) {
+      return Left(UnknownError(stackTrace: stackTrace));
     }
   }
 
   @override
-  Future<Either<Failure, UserEntity>> update(UserEntity model) async {
+  Future<Either<Failure, UserEntity>> update(UserEntity user) async {
     try {
-      return await _httpService.post(
-        '/update-user',
-        data: {
-          'id': model.id.toString(),
-          'new_name': model.name,
-        },
-      ).then((response) {
-        if (response.statusCode == 200) {
-          return right(UserAdapter.fromJson(response.data));
-        }
-        throw Exception();
-      });
-    } on DioException catch (e) {
-      HttpStatusCodeEnum errorType = getHttpStatusFunction(
-          e.response?.statusCode ?? HttpStatus.badRequest);
-      return left(ErrorRequest(message: errorType.errorMessage));
+      final result = await _datasource.update(user);
+
+      return Right(result);
+    } on Failure catch (e) {
+      return Left(e);
+    } on Exception catch (exception, stackTrace) {
+      return Left(UnknownError(stackTrace: stackTrace));
     }
   }
 }

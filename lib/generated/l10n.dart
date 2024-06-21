@@ -70,13 +70,43 @@ class S {
     );
   }
 
-  /// `No items found for {message}`
-  String noItemsFoundErrorMessage(Object placeholders, Object message) {
+  /// `No internet connection`
+  String get noInternetConnectionError {
     return Intl.message(
-      'No items found for $message',
-      name: 'noItemsFoundErrorMessage',
+      'No internet connection',
+      name: 'noInternetConnectionError',
       desc: '',
-      args: [placeholders, message],
+      args: [],
+    );
+  }
+
+  /// `No data found`
+  String get noDataFoundError {
+    return Intl.message(
+      'No data found',
+      name: 'noDataFoundError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Timeout`
+  String get timeoutErrorMessage {
+    return Intl.message(
+      'Timeout',
+      name: 'timeoutErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown error`
+  String get unknownError {
+    return Intl.message(
+      'Unknown error',
+      name: 'unknownError',
+      desc: '',
+      args: [],
     );
   }
 }

@@ -7,7 +7,7 @@ abstract class UserRepository {
 
   Future<Either<Failure, UserEntity>> insert(String name);
 
-  Future<Either<Failure, UserEntity>> update(UserEntity model);
+  Future<Either<Failure, UserEntity>> update(UserEntity user);
 
   Future<Either<Failure, Unit>> delete(int id);
 }

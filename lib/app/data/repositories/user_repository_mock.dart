@@ -21,13 +21,13 @@ class UserRepositoryMock implements UserRepository {
       }
     }
 
-    return left(NoItemsFound(message: '${model.id}'));
+    return left(UnknownError());
   }
 
   @override
   Future<Either<Failure, Unit>> delete(int id) async {
     if (users.every((user) => user.id != id)) {
-      return left(NoItemsFound(message: '$id'));
+      return left(UnknownError());
     }
     users.removeWhere((user) => user.id == id);
     return right(unit);
