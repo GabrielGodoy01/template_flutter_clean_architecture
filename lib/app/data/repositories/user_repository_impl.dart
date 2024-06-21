@@ -2,17 +2,18 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_clean_architecture_template/app/data/models/user_model.dart';
+import 'package:flutter_clean_architecture_template/app/data/adapters/user_adapter.dart';
 import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
 import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
 import 'package:flutter_clean_architecture_template/app/shared/helpers/enums/http_status_code_enum.dart';
 import 'package:flutter_clean_architecture_template/app/domain/failures/failures.dart';
 import 'package:flutter_clean_architecture_template/app/shared/helpers/functions/get_http_status_function.dart';
 import 'package:flutter_clean_architecture_template/app/shared/helpers/services/http_service.dart';
-import 'package:flutter_clean_architecture_template/app/injector.dart';
 
-class DioUserRepository implements UserRepository {
-  final _httpService = injector.get<IHttpService>();
+class UserRepositoryImpl implements UserRepository {
+  final IHttpService _httpService;
+
+  UserRepositoryImpl(this._httpService);
 
   @override
   Future<Either<Failure, Unit>> delete(int id) async {
@@ -38,7 +39,7 @@ class DioUserRepository implements UserRepository {
       return await _httpService.get('/get-all-users').then((response) {
         if (response.statusCode == 200) {
           var users = (response.data['all_users'] as List)
-              .map((user) => UserModel.fromJson(user))
+              .map((user) => UserAdapter.fromJson(user))
               .toList();
           return right(users);
         }
@@ -61,7 +62,7 @@ class DioUserRepository implements UserRepository {
         },
       ).then((response) {
         if (response.statusCode == 201) {
-          return right(UserModel.fromJson(response.data));
+          return right(UserAdapter.fromJson(response.data));
         }
         throw Exception();
       });
@@ -83,7 +84,7 @@ class DioUserRepository implements UserRepository {
         },
       ).then((response) {
         if (response.statusCode == 200) {
-          return right(UserModel.fromJson(response.data));
+          return right(UserAdapter.fromJson(response.data));
         }
         throw Exception();
       });

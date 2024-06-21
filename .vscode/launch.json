@@ -5,20 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "dev",
+            "name": "LOCAL",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define=ENV=LOCAL",
+            ]
+        },
+        {
+            "name": "DEV",
             "request": "launch",
             "type": "dart",
             "args": [
                 "--dart-define=ENV=DEV",
-            ]
-        },
-        {
-            "name": "homolog",
-            "request": "launch",
-            "flutterMode": "debug",
-            "type": "dart",
-            "args": [
-                "--dart-define=ENV=HOMOLOG",
                 "--dart-define=MSS_BASE_URL=https://jmpxkck519.execute-api.sa-east-1.amazonaws.com/prod/python-mss-template",
             ]
         },

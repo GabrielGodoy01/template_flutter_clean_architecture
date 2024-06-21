@@ -1,8 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:flutter_clean_architecture_template/app/data/repositories/dio_user_repository.dart';
-import 'package:flutter_clean_architecture_template/app/data/repositories/mock_user_repository.dart';
+import 'package:flutter_clean_architecture_template/app/data/repositories/user_repository_impl.dart';
+import 'package:flutter_clean_architecture_template/app/data/repositories/user_repository_mock.dart';
 import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
+import 'package:flutter_clean_architecture_template/app/injector.dart';
 import 'package:flutter_clean_architecture_template/app/shared/helpers/enums/environment_enum.dart';
 
 class EnvironmentConfig {
@@ -16,12 +17,14 @@ class EnvironmentConfig {
       (element) {
         return element.name.toUpperCase() == ENV.toUpperCase();
       },
-      orElse: () => EnvironmentEnum.DEV,
+      orElse: () => EnvironmentEnum.LOCAL,
     );
-    if (value == EnvironmentEnum.DEV) {
-      return MockUserRepository();
+    if (value == EnvironmentEnum.LOCAL) {
+      return UserRepositoryMock();
     } else {
-      return DioUserRepository();
+      return UserRepositoryImpl(
+        injector.get(),
+      );
     }
   }
 }

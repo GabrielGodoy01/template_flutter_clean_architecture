@@ -4,7 +4,7 @@ import 'package:flutter_clean_architecture_template/app/domain/enum/state_enum.d
 import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
 import 'package:flutter_clean_architecture_template/app/domain/failures/failures.dart';
 
-class MockUserRepository implements UserRepository {
+class UserRepositoryMock implements UserRepository {
   List<UserEntity> users = [
     const UserEntity(id: 1, name: 'User 1', state: StateEnum.approved),
     const UserEntity(id: 2, name: 'User 2', state: StateEnum.approved),
