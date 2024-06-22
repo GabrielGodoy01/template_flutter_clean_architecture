@@ -51,7 +51,11 @@ class DioHttpClient extends IHttpClient {
           error.type == DioExceptionType.receiveTimeout) {
         throw TimeOutError(error.message, stackTrace: error.stackTrace);
       }
-      throw HttpClientError(error.message, stackTrace: error.stackTrace);
+      // Caso o front lide com as mensagens de erro:
+      // HttpStatusCodeEnum errorType = getHttpStatusFunction(
+      //     e.response?.statusCode ?? HttpStatus.badRequest);
+      // Caso a mensagem de erro venha da API:
+      throw HttpClientError(error.response!.data, stackTrace: error.stackTrace);
     }
   }
 

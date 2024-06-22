@@ -17,17 +17,21 @@ class UserRepositoryMock implements UserRepository {
       if (users[i].id == model.id) {
         users.removeWhere((element) => element.id == model.id);
         users.insert(i, model);
-        return Future.value(right(model));
+        return right(model);
       }
     }
 
-    return left(UnknownError());
+    return left(
+      UpdateUserError(stackTrace: null, errorMessage: 'User not found'),
+    );
   }
 
   @override
   Future<Either<Failure, Unit>> delete(int id) async {
     if (users.every((user) => user.id != id)) {
-      return left(UnknownError());
+      return left(
+        DeleteUserError(stackTrace: null, errorMessage: 'User not found'),
+      );
     }
     users.removeWhere((user) => user.id == id);
     return right(unit);
@@ -35,7 +39,9 @@ class UserRepositoryMock implements UserRepository {
 
   @override
   Future<Either<Failure, List<UserEntity>>> getAll() async {
-    // return left(NoItemsFound(message: 'users'));
+    if (users.isEmpty) {
+      return left(NoDataFound());
+    }
     return right(users);
   }
 

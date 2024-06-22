@@ -22,7 +22,10 @@ class UserDatasourceImpl implements UserDatasource {
       if (e is TimeOutError) {
         throw NoInternetConnection();
       } else {
-        throw UnknownError(stackTrace: stackTrace);
+        throw DeleteUserError(
+          stackTrace: stackTrace,
+          errorMessage: e.errorMessage,
+        );
       }
     }
   }
@@ -32,12 +35,15 @@ class UserDatasourceImpl implements UserDatasource {
     try {
       final response = await _httpClient.get('/get-all-users');
 
-      return UserAdapter.fromJsonList(response.data);
+      return UserAdapter.fromJsonList(response.data['all_users']);
     } on Failure catch (e, stackTrace) {
       if (e is TimeOutError) {
         throw NoInternetConnection();
       } else {
-        throw UnknownError(stackTrace: stackTrace);
+        throw GetAllUsersError(
+          stackTrace: stackTrace,
+          errorMessage: e.errorMessage,
+        );
       }
     }
   }
@@ -46,8 +52,10 @@ class UserDatasourceImpl implements UserDatasource {
   Future<UserEntity> insert(String name) async {
     try {
       final response = await _httpClient.post(
-        '/delete-user',
-        data: {'id': id.toString()},
+        '/create-user',
+        data: {
+          'name': name,
+        },
       );
 
       return UserAdapter.fromJson(response.data);
@@ -55,7 +63,10 @@ class UserDatasourceImpl implements UserDatasource {
       if (e is TimeOutError) {
         throw NoInternetConnection();
       } else {
-        throw UnknownError(stackTrace: stackTrace);
+        throw CreateUserError(
+          stackTrace: stackTrace,
+          errorMessage: e.errorMessage,
+        );
       }
     }
   }
@@ -64,8 +75,11 @@ class UserDatasourceImpl implements UserDatasource {
   Future<UserEntity> update(UserEntity model) async {
     try {
       final response = await _httpClient.post(
-        '/delete-user',
-        data: {'id': id.toString()},
+        '/update-user',
+        data: {
+          'id': model.id.toString(),
+          'new_name': model.name,
+        },
       );
 
       return UserAdapter.fromJson(response.data);
@@ -73,7 +87,10 @@ class UserDatasourceImpl implements UserDatasource {
       if (e is TimeOutError) {
         throw NoInternetConnection();
       } else {
-        throw UnknownError(stackTrace: stackTrace);
+        throw UpdateUserError(
+          stackTrace: stackTrace,
+          errorMessage: e.errorMessage,
+        );
       }
     }
   }

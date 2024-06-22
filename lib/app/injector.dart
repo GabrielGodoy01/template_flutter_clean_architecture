@@ -1,4 +1,6 @@
 import 'package:auto_injector/auto_injector.dart';
+import 'package:flutter_clean_architecture_template/app/data/datasources/user_datasource.dart';
+import 'package:flutter_clean_architecture_template/app/external/datasources/user_datasource_impl.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
@@ -30,14 +32,11 @@ class _AutoInjector implements Injector {
     injector.addLazySingleton(UserProvider.new);
     injector.addLazySingleton<UserRepository>(
         () => EnvironmentConfig.getUserRepo());
-    injector.addLazySingleton<IFetchUsersUsecase>(
-        () => FetchUsersUsecase(repository: injector.get<UserRepository>()));
-    injector.addLazySingleton<ICreateUserUsecase>(
-        () => CreateUserUsecase(repository: injector.get<UserRepository>()));
-    injector.addLazySingleton<IDeleteUserUsecase>(
-        () => DeleteUserUsecase(repository: injector.get<UserRepository>()));
-    injector.addLazySingleton<IUpdateUserUsecase>(
-        () => UpdateUserUsecase(repository: injector.get<UserRepository>()));
+    injector.addLazySingleton<UserDatasource>(UserDatasourceImpl.new);
+    injector.addLazySingleton<IFetchUsersUsecase>(FetchUsersUsecase.new);
+    injector.addLazySingleton<ICreateUserUsecase>(CreateUserUsecase.new);
+    injector.addLazySingleton<IDeleteUserUsecase>(DeleteUserUsecase.new);
+    injector.addLazySingleton<IUpdateUserUsecase>(UpdateUserUsecase.new);
     injector.commit();
   }
 

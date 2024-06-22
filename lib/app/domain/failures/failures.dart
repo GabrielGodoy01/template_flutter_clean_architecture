@@ -37,3 +37,31 @@ class UnknownError extends Failure {
           errorMessage: S.current.unknownError,
         );
 }
+
+class DeleteUserError extends Failure {
+  DeleteUserError({
+    required super.stackTrace,
+    required super.errorMessage,
+  });
+}
+
+class GetAllUsersError extends Failure {
+  GetAllUsersError({
+    required super.stackTrace,
+    required super.errorMessage,
+  });
+}
+
+class CreateUserError extends Failure {
+  CreateUserError({
+    required super.stackTrace,
+    required super.errorMessage,
+  });
+}
+
+class UpdateUserError extends Failure {
+  UpdateUserError({
+    required super.stackTrace,
+    required super.errorMessage,
+  });
+}
