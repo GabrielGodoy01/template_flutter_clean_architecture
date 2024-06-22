@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_clean_architecture_template/app/data/adapters/user_adapter.dart';
 import 'package:flutter_clean_architecture_template/app/data/datasources/user_datasource.dart';
 import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
