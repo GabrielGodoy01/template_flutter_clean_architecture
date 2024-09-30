@@ -8,7 +8,7 @@ class UserAdapter {
 
   static UserEntity fromJson(Map<String, dynamic> json) {
     return UserEntity(
-      id: json['id'],
+      id: json['user_id'],
       name: json['name'],
       state: StateEnum.values.firstWhere(
         (element) =>
@@ -20,7 +20,7 @@ class UserAdapter {
 
   static Map<String, dynamic> toJson(UserEntity user) {
     return {
-      'id': user.id,
+      'user_id': user.id,
       'name': user.name,
       'state': user.state.name,
     };

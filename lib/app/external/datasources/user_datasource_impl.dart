@@ -15,7 +15,7 @@ class UserDatasourceImpl implements UserDatasource {
     try {
       await _httpClient.post(
         '/delete-user',
-        data: {'id': id.toString()},
+        data: {'user_id': id},
       );
     } on Failure catch (e, stackTrace) {
       if (e is TimeOutError) {
@@ -76,7 +76,7 @@ class UserDatasourceImpl implements UserDatasource {
       final response = await _httpClient.post(
         '/update-user',
         data: {
-          'id': model.id.toString(),
+          'user_id': model.id,
           'new_name': model.name,
         },
       );
